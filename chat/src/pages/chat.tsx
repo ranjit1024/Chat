@@ -27,5 +27,5 @@ function Send({text} : {
         </div>
     </div>
 }
-const data : string = "i am ranjit das";
+
 
