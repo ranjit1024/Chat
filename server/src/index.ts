@@ -7,15 +7,21 @@ app.use(express.json());
 const port: number = 3000;
 const userIds: string[] = ["#121233", "#4556344", "#34354e5"];
 app.post("/connect", (req, res) => {
+  const { userId }: { userId: string } = req.body;
+  console.log(userId);
   try {
-    const { userId }: { userId: string } = req.body;
-    console.log(userId);
     for (let i of userIds) {
       if (i === userId) {
         res.json({
-          mag: "User exist",
+          msg: "User exist",
         });
         return
+      } 
+      else{
+        res.status(400).json({
+          msg:'User not found'
+        })
+        break;
       }
     }
    
