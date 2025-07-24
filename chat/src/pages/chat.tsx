@@ -27,5 +27,3 @@ function Send({text} : {
         </div>
     </div>
 }
-
-
