@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/ws": "^8.18.1",
     "cors": "^2.8.5",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "http": "^0.0.1-security"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

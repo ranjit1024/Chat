@@ -1,7 +1,10 @@
 import express, { Express } from "express";
 import cors from "cors";
+import WebSocket from "ws";
 
-const app: Express = express();
+const app:Express = express();
+const server = 
+const wss = new WebSocket.Server(app);
 app.use(cors());
 app.use(express.json());
 const port: number = 3000;
