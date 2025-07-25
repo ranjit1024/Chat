@@ -61,6 +61,7 @@ export function Home() {
       </div>
     ):(
       <div className="flex justify-center flex-col ">
+        {userId}
          <input value={toUserid} onChange={(e)=>{
           setTouserId(e.target.value)
         }} type="text" placeholder="Enter Sender userId " className="m-3 border p-2 rounded-2xl" name="" id="" />
