@@ -10,27 +10,23 @@ export function Chat() {
   const socketRef = useRef<WebSocket | null>(null);
 
   const [text, setText] = useState<Message[]>([]);
-  const [messageText, setMessageText] = useState('')
-  socket.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    setText((prev) => [...prev, { from: data.from, text: data.text }]);
-  };
+  const [messageText, setMessageText] = useState("");
 
-  const sendMessage = ()=>{
-    if(socketRef.current && socketRef.current.readyState === WebSocket.OPEN ){
-        socketRef.current.send(
-            JSON.stringify({
-                type:'send',
-                to:1212,
-                text:messageText
 
-            })
-        )
-        setText((prev) => [...prev, { from: 'Me', text: messageText }]);
-        setMessageText('');
+  const sendMessage = () => {
+    if (socketRef.current && socketRef.current.readyState === WebSocket.OPEN) {
+      socketRef.current.send(
+        JSON.stringify({
+          type: "send",
+          to: 1212,
+          text: messageText,
+        })
+      );
+      setText((prev) => [...prev, { from: "Me", text: messageText }]);
+      setMessageText("");
     }
-  }
-  
+  };
+ 
   return (
     <div className="flex flex-col  h-[97vh] w-[100vw] justify-end items-center ">
       <div className="flex gap-4">
@@ -39,9 +35,12 @@ export function Chat() {
           ref={send}
           placeholder="enter text"
           className="w-[90vw] border p-3 rounded-xl"
+          onChange={(e) => {
+            setMessageText(e.target.value);
+          }}
         />
         <div
-          onClick={() => {}}
+          onClick={sendMessage}
           className="p-2 bg-gray-200 rounded-2xl flex hover:cursor-pointer hover:bg-gray-300 "
         >
           <img

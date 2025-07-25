@@ -1,26 +1,29 @@
-import axios from "axios";
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-export const Home  = () => {
-  const userid = useRef<HTMLInputElement | null>(null);
-  const route = useNavigate()
-  return <div  className='flex justify-center flex-col gap-5 h-[100vh] items-center'>
-    <input ref={userid} className='w-[90vw] border p-2 rounded-xl  ' placeholder='Enter user id'></input>
-    <button className='p-2 bg-indigo-500 rounded-xl text-gray-100 hover:cursor-pointer ' onClick={async ()=>{
-      try{
-        const response  =  await axios.post('http://localhost:3000/connect',{
-          userId:String(userid.current?.value)
-        });
-        if(response.status === 200){
-          route('/chat')
-        }
-       
-      }
-      catch(error){
-        console.log(error)
-      }
-    }}>Connect</button>
+import  { useState, useRef }  from "react";
+
+interface Message {
+  from: string,
+  text: string
+}
+
+export function Home(){
+  const [userId, setUserid] = useState('');
+  const [connectd, setConnectd] = useState(false);
+  const [toUserid, setTouserId] = useState('');
+  const [messageText, setMessageText] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const socketRef = useRef<WebSocket | null>(null);
+
+  const connectWebSocket = () =>{
+    const socket = new WebSocket("ws://localhost:3000");
+
+    socket.onopen = () =>{
+      socket.send(JSON.stringify({type:'register', userId}));
+      setConnectd(true);
+    }
+    
+    
+  }
+  return <div>
+    
   </div>
-};
-
-
+}
