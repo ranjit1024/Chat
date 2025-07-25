@@ -52,7 +52,7 @@ export function Home() {
       <h2>🟢 WebSocket Chat</h2>
   {
     !connected ? (
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col justify-center mt-10">
         <span>Welcome to chat Application</span>
         <input value={userId} onChange={(e)=>{
           setUserid(e.target.value)
@@ -60,7 +60,7 @@ export function Home() {
         <button onClick={connectWebSocket} className="px-5 py-2 bg-indigo-500 rounded-2xl text-white">Connect</button>
       </div>
     ):(
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col ">
          <input value={toUserid} onChange={(e)=>{
           setTouserId(e.target.value)
         }} type="text" placeholder="Enter Sender userId " className="m-3 border p-2 rounded-2xl" name="" id="" />
@@ -70,7 +70,7 @@ export function Home() {
 
         <button onClick={sendMessage} className="px-5 py-2 bg-indigo-500 rounded-2xl text-white">send</button>
 
-          <div style={{ marginTop: 20 }}>
+          <div style={{ marginTop: 20 }} >
             <h4>Messages:</h4>
             {messages.map((msg, i) => (
               <div key={i}>
