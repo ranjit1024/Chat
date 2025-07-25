@@ -5,10 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const ws_1 = __importDefault(require("ws"));
+const port = 3000;
 const app = (0, express_1.default)();
+const server = app.listen(port, () => {
+    console.log(`Server Start ${Date.now()} on ${port}`);
+});
+const wss = new ws_1.default.Server({ server });
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-const port = 3000;
 const userIds = ["#121233", "#4556344", "#34354e5"];
 app.post("/connect", (req, res) => {
     const { userId } = req.body;
@@ -38,6 +43,7 @@ app.post("/connect", (req, res) => {
 app.get("/", (req, res) => {
     res.send("Working...");
 });
-app.listen(port, () => {
-    console.log(`Server Start ${Date.now()} on ${port}`);
+wss.on('connection', (socket) => {
+    socket.on('error', console.error);
+    socket.send("Connected");
 });

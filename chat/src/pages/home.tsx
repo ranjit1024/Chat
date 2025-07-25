@@ -1,5 +1,4 @@
 import axios from "axios";
-import { CodeSquare } from "lucide-react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 export const Home  = () => {
